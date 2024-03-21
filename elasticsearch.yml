@@ -1,10 +1,10 @@
-# path:
-#     data: /var/lib/elasticsearch
-#     logs: /var/log/elasticsearch
+path:
+  data: /var/lib/elasticsearch
+  logs: /var/log/elasticsearch
 #     plugins: /var/plugins/elasticsearch
 #     work: /var/work/elasticsearch
-path:
-  data: /data/data
-  logs: /data/log
+# path:
+#   data: /data/data
+#   logs: /data/log
 #   plugins: /data/plugins
 #   work: /data/work
