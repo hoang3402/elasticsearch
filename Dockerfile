@@ -20,11 +20,12 @@ RUN chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/ && \
 USER elasticsearch
 
 # Expose cổng mặc định của Elasticsearch
-EXPOSE 9200 9300
+EXPOSE 9200 
+EXPOSE 9300
 
 # Cấu hình Elasticsearch để chấp nhận remote connections
 # Thay đổi 'network.host' từ 'localhost' sang '0.0.0.0'
-# RUN echo "network.host: 0.0.0.0" >> /etc/elasticsearch/elasticsearch.yml
+RUN echo "network.host: 0.0.0.0" >> /etc/elasticsearch/elasticsearch.yml
 
 # Điểm vào để khởi động Elasticsearch khi container bắt đầu
 ENTRYPOINT ["/usr/share/elasticsearch/bin/elasticsearch"]
