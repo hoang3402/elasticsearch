@@ -27,6 +27,7 @@ ADD elasticsearch.yml /elasticsearch/config/elasticsearch.yml
 WORKDIR /data
 
 # Define default command.
+CMD ["ls"]
 CMD ["/elasticsearch/bin/elasticsearch"]
 
 # Expose ports.
