@@ -5,22 +5,32 @@
 #
 
 # Pull base image.
-FROM docker.elastic.co/elasticsearch/elasticsearch:8.12.2
+FROM dockerfile/java:oracle-java8
 
-ENV discovery.type="single-node"
+ENV ES_PKG_NAME elasticsearch-8.12.2
 
-COPY --chown=elasticsearch:elasticsearch elasticsearch.yml /usr/share/elasticsearch/config/
+# Install Elasticsearch.
+RUN \
+  cd / && \
+  wget https://download.elasticsearch.org/elasticsearch/elasticsearch/$ES_PKG_NAME-linux-x86_64.tar.gz && \
+  tar xvzf $ES_PKG_NAME.tar.gz && \
+  rm -f $ES_PKG_NAME.tar.gz && \
+  mv /$ES_PKG_NAME /elasticsearch
 
 # Define mountable directories.
 VOLUME ["/data"]
 
+# Mount elasticsearch.yml config
+ADD elasticsearch.yml /elasticsearch/config/elasticsearch.yml
+
 # Define working directory.
 WORKDIR /data
+
+# Define default command.
+CMD ["/elasticsearch/bin/elasticsearch"]
 
 # Expose ports.
 #   - 9200: HTTP
 #   - 9300: transport
 EXPOSE 9200
 EXPOSE 9300
-
-CMD ["elasticsearch"]
