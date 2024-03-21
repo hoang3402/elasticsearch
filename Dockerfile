@@ -7,7 +7,7 @@
 # Pull base image.
 FROM sgrio/java:server_jre_8_alpine
 
-ENV ES_PKG_NAME elasticsearch-1.5.0
+ENV ES_PKG_NAME elasticsearch-8.12.2
 
 # Install Elasticsearch.
 RUN \
