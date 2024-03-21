@@ -2,14 +2,14 @@
 FROM ubuntu:latest
 
 # Cập nhật danh sách gói và cài đặt curl và gnupg cần thiết để thêm khóa GPG
-RUN apt-get update && 
-    apt-get install -y curl gnupg && 
-    curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add - && 
-    echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-7.x.list && 
+RUN apt-get update && \
+    apt-get install -y curl gnupg && \
+    curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add - && \
+    echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-7.x.list && \
     apt-get update && apt-get install -y elasticsearch
 
 # Tạo người dùng không phải là root để chạy Elasticsearch
-RUN groupadd elasticsearch && 
+RUN groupadd elasticsearch && \
     useradd -g elasticsearch -m elasticsearch
 
 # Đổi chủ sở hữu của các thư mục cần thiết
