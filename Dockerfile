@@ -1,18 +1,21 @@
-# Sử dụng image cơ bản của Ubuntu
+# Sử dụng image cơ bản của Ubuntu và cài đặt các công cụ cần thiết
 FROM ubuntu:latest
 
-# Cập nhật danh sách các gói và cài đặt sudo (nếu cần)
-RUN apt-get update && apt-get install -y sudo
-
 # Cập nhật danh sách gói và cài đặt curl và gnupg cần thiết để thêm khóa GPG
-RUN apt-get update && \
-    apt-get install -y curl gnupg && \
-    # Thêm khóa GPG cho Elasticsearch
-    curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add - && \
-    # Thêm nguồn APT cho Elasticsearch
-    echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-7.x.list && \
-    # Cập nhật lại danh sách gói sau khi thêm nguồn mới và cài đặt Elasticsearch
+RUN apt-get update && 
+    apt-get install -y curl gnupg && 
+    curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add - && 
+    echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-7.x.list && 
     apt-get update && apt-get install -y elasticsearch
+
+# Tạo người dùng không phải là root để chạy Elasticsearch
+RUN groupadd elasticsearch && 
+    useradd -g elasticsearch -m elasticsearch
+
+# Đổi chủ sở hữu của các thư mục cần thiết
+RUN chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/ /etc/elasticsearch
+
+USER elasticsearch
 
 # Expose cổng mặc định của Elasticsearch
 EXPOSE 9200 9300
