@@ -27,7 +27,7 @@ ADD elasticsearch.yml /elasticsearch/config/elasticsearch.yml
 WORKDIR /data
 
 # Define default command.
-CMD ["sh", "-c", "$ES_PKG_NAME/bin/elasticsearch"]
+CMD ["./bin/elasticsearch"]
 
 # Expose ports.
 #   - 9200: HTTP
