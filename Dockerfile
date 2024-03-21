@@ -17,6 +17,9 @@ RUN \
   wget https://artifacts.elastic.co/downloads/elasticsearch/$ES_PKG_NAME-linux-x86_64.tar.gz && \
   tar xzf $ES_PKG_NAME-linux-x86_64.tar.gz && \
   rm -f $ES_PKG_NAME-linux-x86_64.tar.gz && \
+  cd $ES_PKG_NAME && \
+  ls && \
+  cd bin && \
   ls
 
 # Mount elasticsearch.yml config
