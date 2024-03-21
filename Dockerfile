@@ -9,17 +9,18 @@ FROM sgrio/java:server_jre_8_alpine
 
 ENV ES_PKG_NAME elasticsearch-8.12.2
 
+WORKDIR /
+
 # Install Elasticsearch.
 RUN \
   cd / && \
   wget https://artifacts.elastic.co/downloads/elasticsearch/$ES_PKG_NAME-linux-x86_64.tar.gz && \
   tar xzf $ES_PKG_NAME-linux-x86_64.tar.gz && \
-  rm -f $ES_PKG_NAME-linux-x86_64.tar.gz 
+  rm -f $ES_PKG_NAME-linux-x86_64.tar.gz && \
+  ls
 
 # Mount elasticsearch.yml config
 ADD elasticsearch.yml /elasticsearch/config/elasticsearch.yml
-
-WORKDIR /
 
 CMD ["/elasticsearch-8.12.2/bin/elasticsearch"]
 
