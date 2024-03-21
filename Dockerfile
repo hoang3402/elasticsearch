@@ -13,7 +13,7 @@ ENV ES_PKG_NAME elasticsearch-8.12.2
 RUN \
   cd / && \
   wget https://artifacts.elastic.co/downloads/elasticsearch/$ES_PKG_NAME-linux-x86_64.tar.gz && \
-  tar xvzf $ES_PKG_NAME-linux-x86_64.tar.gz && \
+  tar xzf $ES_PKG_NAME-linux-x86_64.tar.gz && \
   rm -f $ES_PKG_NAME-linux-x86_64.tar.gz && \
   mv /$ES_PKG_NAME /elasticsearch
 
@@ -27,7 +27,7 @@ ADD elasticsearch.yml /elasticsearch/config/elasticsearch.yml
 WORKDIR /data
 
 # Define default command.
-CMD ["./bin/elasticsearch"]
+CMD ["/elasticsearch/bin/elasticsearch"]
 
 # Expose ports.
 #   - 9200: HTTP
