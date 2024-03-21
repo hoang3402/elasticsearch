@@ -15,7 +15,7 @@ RUN \
   wget https://artifacts.elastic.co/downloads/elasticsearch/$ES_PKG_NAME-linux-x86_64.tar.gz && \
   tar xvzf $ES_PKG_NAME-linux-x86_64.tar.gz && \
   rm -f $ES_PKG_NAME-linux-x86_64.tar.gz && \
-  mv /$ES_PKG_NAME-linux-x86_64 /elasticsearch
+  mv /$ES_PKG_NAME /elasticsearch
 
 # Define mountable directories.
 VOLUME ["/data"]
