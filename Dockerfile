@@ -23,7 +23,9 @@ RUN \
 # Mount elasticsearch.yml config
 ADD elasticsearch.yml /elasticsearch/config/elasticsearch.yml
 
-RUN /elasticsearch/bin/elasticsearch
+RUN cd / && \
+  cd /elasticsearch/bin && \
+  ./elasticsearch
 
 # Expose ports.
 #   - 9200: HTTP
