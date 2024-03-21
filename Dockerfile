@@ -14,16 +14,14 @@ RUN \
   cd / && \
   wget https://artifacts.elastic.co/downloads/elasticsearch/$ES_PKG_NAME-linux-x86_64.tar.gz && \
   tar xzf $ES_PKG_NAME-linux-x86_64.tar.gz && \
-  rm -f $ES_PKG_NAME-linux-x86_64.tar.gz && \
-  mv /$ES_PKG_NAME /elasticsearch
+  rm -f $ES_PKG_NAME-linux-x86_64.tar.gz 
 
 # Mount elasticsearch.yml config
 ADD elasticsearch.yml /elasticsearch/config/elasticsearch.yml
 
-WORKDIR /elasticsearch/bin
+WORKDIR /
 
-CMD ["ls"]
-CMD ["./elasticsearch"]
+CMD ["/elasticsearch-8.12.2/bin/elasticsearch"]
 
 # Expose ports.
 #   - 9200: HTTP
