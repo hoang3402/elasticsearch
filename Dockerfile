@@ -5,7 +5,7 @@
 #
 
 # Pull base image.
-FROM dockerfile/java:oracle-java8
+FROM sgrio/java:server_jre_8_alpine
 
 ENV ES_PKG_NAME elasticsearch-8.12.2
 
