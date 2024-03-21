@@ -5,7 +5,7 @@
 #
 
 # Pull base image.
-FROM elasticsearch/elasticsearch:8.12.2
+FROM docker.elastic.co/elasticsearch/elasticsearch:8.12.2
 COPY --chown=elasticsearch:elasticsearch config/elasticsearch.yml /usr/share/elasticsearch/config/
 
 # Expose ports.
