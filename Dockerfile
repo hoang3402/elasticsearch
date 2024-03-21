@@ -4,12 +4,15 @@ FROM ubuntu:latest
 # Cập nhật danh sách các gói và cài đặt sudo (nếu cần)
 RUN apt-get update && apt-get install -y sudo
 
-# Thêm khóa GPG và địa chỉ nguồn APT cho Elasticsearch
-RUN curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-RUN echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
-
-# Cập nhật lại danh sách gói sau khi thêm nguồn mới rồi cài đặt Elasticsearch
-RUN sudo apt-get update && sudo apt-get install -y elasticsearch
+# Cập nhật danh sách gói và cài đặt curl và gnupg cần thiết để thêm khóa GPG
+RUN apt-get update && \
+    apt-get install -y curl gnupg && \
+    # Thêm khóa GPG cho Elasticsearch
+    curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add - && \
+    # Thêm nguồn APT cho Elasticsearch
+    echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-7.x.list && \
+    # Cập nhật lại danh sách gói sau khi thêm nguồn mới và cài đặt Elasticsearch
+    apt-get update && apt-get install -y elasticsearch
 
 # Expose cổng mặc định của Elasticsearch
 EXPOSE 9200 9300
