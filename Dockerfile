@@ -17,15 +17,15 @@ RUN \
   wget https://artifacts.elastic.co/downloads/elasticsearch/$ES_PKG_NAME-linux-x86_64.tar.gz && \
   tar xzf $ES_PKG_NAME-linux-x86_64.tar.gz && \
   rm -f $ES_PKG_NAME-linux-x86_64.tar.gz && \
-  mv $ES_PKG_NAME /elasticsearch && \
-  ls
+  mv $ES_PKG_NAME /elasticsearch
 
 # Mount elasticsearch.yml config
 ADD elasticsearch.yml /elasticsearch/config/elasticsearch.yml
 
 RUN cd / && \
   cd /elasticsearch/bin && \
-  ./elasticsearch
+  ls && \
+  elasticsearch
 
 # Expose ports.
 #   - 9200: HTTP
