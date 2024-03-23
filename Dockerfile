@@ -8,9 +8,9 @@ RUN apt-get update && \
     echo "deb https://artifacts.elastic.co/packages/8.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-7.x.list && \
     apt-get update && apt-get install -y elasticsearch
 
-# Tạo người dùng và nhóm không phải là root để chạy Elasticsearch nếu chúng chưa tồn tại
-RUN groupadd --gid 1000 elasticsearch && 
-    useradd -g elasticsearch --uid 1000 --home-dir /usr/share/elasticsearch --shell /bin/bash elasticsearch
+RUN groupadd -r elasticsearch
+
+RUN useradd -r -g elasticsearch -d /usr/share/elasticsearch -s /bin/bash elasticsearch
 
 # Đổi chủ sở hữu của các thư mục cần thiết
 RUN chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/ && 
