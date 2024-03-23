@@ -8,9 +8,8 @@ RUN apt-get update && \
     echo "deb https://artifacts.elastic.co/packages/8.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-7.x.list && \
     apt-get update && apt-get install -y elasticsearch
 
-RUN groupadd -r elasticsearch
-
-RUN useradd -r -g elasticsearch -d /usr/share/elasticsearch -s /bin/bash elasticsearch
+RUN getent group elasticsearch || groupadd elasticsearch && \
+    id -u elasticsearch &>/dev/null || useradd -g elasticsearch -m elasticsearch
 
 # Đổi chủ sở hữu của các thư mục cần thiết
 RUN chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/ && \
