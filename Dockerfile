@@ -13,10 +13,9 @@ RUN groupadd -r elasticsearch
 RUN useradd -r -g elasticsearch -d /usr/share/elasticsearch -s /bin/bash elasticsearch
 
 # Đổi chủ sở hữu của các thư mục cần thiết
-RUN chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/ && 
-    chown -R elasticsearch:elasticsearch /var/lib/elasticsearch/ && 
-    chown -R elasticsearch:elasticsearch /etc/elasticsearch/ && 
-    chown -R elasticsearch:elasticsearch /var/log/elasticsearch/
+RUN chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/ && \
+    chown -R elasticsearch:elasticsearch /etc/elasticsearch/ && \
+    chown -R elasticsearch:elasticsearch /var/lib/elasticsearch/
 
 USER elasticsearch
 
